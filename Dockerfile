@@ -10,7 +10,7 @@ RUN pip install flask
 RUN pip install sentence-transformers
 
 # Copy the rest of the application code into the container
-RUN git clone https://github.com/abshek/sentence-transformers-server.git .
+RUN git clone -b release https://github.com/abshek/sentence-transformers-server.git .
 
 # Expose the desired port
 EXPOSE 8081
