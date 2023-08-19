@@ -19,8 +19,8 @@ def transform_sentences():
         if not sentences or not isinstance(sentences, list):
             return jsonify({'error': 'Invalid input format'}), 400
         
-        embeddings = model.encode(sentences, normalize_embeddings=True)
-        return jsonify({'model':model_name, 'embeddings': embeddings}), 200
+        embeddings = model.encode(sentences, convert_to_tensor=True)
+        return jsonify({'model':model_name, 'embeddings': embeddings.tolist()}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
