@@ -5,11 +5,12 @@ FROM python:3.8-slim
 WORKDIR /app
 
 # Install any necessary dependencies
+RUN apt-get update && apt-get install -y git
 RUN pip install flask
 RUN pip install sentence-transformers
 
 # Copy the rest of the application code into the container
-COPY embedding_server.py .
+RUN git clone https://github.com/abshek/sentence-transformers-server.git .
 
 # Expose the desired port
 EXPOSE 8081
