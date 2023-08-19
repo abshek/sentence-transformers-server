@@ -20,7 +20,7 @@ def transform_sentences():
             return jsonify({'error': 'Invalid input format'}), 400
         
         embeddings = model.encode(sentences)
-        return jsonify({'embeddings': embeddings}), 200
+        return jsonify({'embeddings': embeddings[0]}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
