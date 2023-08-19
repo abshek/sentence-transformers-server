@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify
 from sentence_transformers import SentenceTransformer
 
-
-model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')  # You can use any other model you prefer
+model_name = 'sentence-transformers/all-MiniLM-L6-v2'
+model = SentenceTransformer(model_name)  # You can use any other model you prefer
 
 app = Flask(__name__)
 
@@ -19,8 +19,8 @@ def transform_sentences():
         if not sentences or not isinstance(sentences, list):
             return jsonify({'error': 'Invalid input format'}), 400
         
-        embeddings = model.encode(sentences)
-        return jsonify({'embeddings': embeddings[0]}), 200
+        embeddings = model.encode(sentences, normalize_embeddings=True)
+        return jsonify({'model':model_name, 'embeddings': embeddings}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
