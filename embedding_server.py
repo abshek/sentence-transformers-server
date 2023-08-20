@@ -22,12 +22,11 @@ def transform_sentences():
         if not input or not isinstance(input, list):
             return jsonify({'error': 'Invalid input format'}), 400
         
-        model
+        model = txt_model
         
         if type == "image":
-            model = txt_model
-        else:
             model = img_model
+            
         embeddings = model.encode(input, convert_to_tensor=True)
         return jsonify({'embeddings': embeddings.tolist()[0]}), 200
     except Exception as e:
