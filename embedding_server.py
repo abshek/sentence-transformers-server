@@ -30,10 +30,12 @@ def transform_sentences():
             filename='images/'+str(uuid.uuid4())+'.jpg'
             #decode base64 string data
             decoded_data=base64.b64decode((input))
+            print("data decoded")
             #write the decoded data back to original format in  file
             img_file = open(filename, 'wb')
             img_file.write(decoded_data)
             img_file.close()
+            print("file created")
             embeddings = img_model.encode(Image.open(filename))
             if os.path.exists(filename):
                 os.remove(filename)
