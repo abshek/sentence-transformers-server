@@ -27,7 +27,7 @@ def transform_sentences():
         if type == "image":
             model = img_model
             
-        embeddings = model.encode(input)
+        embeddings = model.encode(input, batch_size=128, convert_to_tensor=True)
         return jsonify({'embeddings': embeddings.tolist()[0]}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
