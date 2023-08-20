@@ -4,6 +4,8 @@ FROM python:3.8-slim
 # Set the working directory inside the container
 WORKDIR /app
 
+RUN mkdir images
+
 # Install any necessary dependencies
 RUN apt-get update && apt-get install -y git
 RUN pip install flask
