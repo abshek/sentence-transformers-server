@@ -27,7 +27,7 @@ def transform_sentences():
         return jsonify({'error': str(e)}), 500
     
 @app.route('/transform/image', methods=['POST'])
-def transform_sentences():
+def transform_images():
     try:
         data = request.json
         imgData = data['img']
