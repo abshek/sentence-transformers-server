@@ -23,9 +23,6 @@ def transform_sentences():
         input = data['input']
         type = data['type']
         
-        if not input or not isinstance(input, list):
-            return jsonify({'error': 'Invalid input format'}), 400
-        
         if type == "image":
             filename='images/'+str(uuid.uuid4())+'.jpg'
             #decode base64 string data
