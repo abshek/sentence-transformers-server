@@ -12,27 +12,23 @@ app = Flask(__name__)
 def hello():
     return "Hello World"
 
-@app.route('/transform/text', methods=['POST'])
+@app.route('/transform', methods=['POST'])
 def transform_sentences():
     try:
         data = request.json
-        sentences = data['sentences']
+        input = data['input']
+        type = data['type']
         
-        if not sentences or not isinstance(sentences, list):
+        if not input or not isinstance(input, list):
             return jsonify({'error': 'Invalid input format'}), 400
         
-        embeddings = txt_model.encode(sentences, convert_to_tensor=True)
-        return jsonify({'embeddings': embeddings.tolist()[0]}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-    
-@app.route('/transform/image', methods=['POST'])
-def transform_images():
-    try:
-        data = request.json
-        imgData = data['img']
+        model
         
-        embeddings = img_model.encode(imgData, convert_to_tensor=True)
+        if type == "image":
+            model = txt_model
+        else:
+            model = img_model
+        embeddings = model.encode(input, convert_to_tensor=True)
         return jsonify({'embeddings': embeddings.tolist()[0]}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
