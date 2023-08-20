@@ -34,10 +34,10 @@ def transform_sentences():
             img_file.close()
             print("file created")
             embeddings = img_model.encode(Image.open(filename))
-            if os.path.exists(filename):
-                os.remove(filename)
-            else:
-                print("The file does not exist") 
+            # if os.path.exists(filename):
+            #     os.remove(filename)
+            # else:
+            #     print("The file does not exist") 
         else:
             embeddings = txt_model.encode(input)
 
