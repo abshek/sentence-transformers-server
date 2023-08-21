@@ -35,14 +35,16 @@ def transform_sentences():
             img_file.close()
             logging.debug("file created")
             embeddings = img_model.encode(Image.open(filename))
+            return jsonify({'embeddings': embeddings.tolist()}), 200
             # if os.path.exists(filename):
             #     os.remove(filename)
             # else:
             #     print("The file does not exist") 
         else:
             embeddings = txt_model.encode(input)
+            return jsonify({'embeddings': embeddings.tolist()[0]}), 200
 
-        return jsonify({'embeddings': embeddings.tolist()[0]}), 200
+        # return jsonify({'embeddings': embeddings.tolist()[0]}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
