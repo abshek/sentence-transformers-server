@@ -4,6 +4,7 @@ import base64
 import uuid
 from PIL import Image
 import os
+import logging
 
 text_model_name = 'sentence-transformers/all-MiniLM-L6-v2'
 img_model_name = 'clip-ViT-B-32'
@@ -27,12 +28,12 @@ def transform_sentences():
             filename='images/'+str(uuid.uuid4())+'.jpg'
             #decode base64 string data
             decoded_data=base64.b64decode((input))
-            print("data decoded")
+            logging.debug("data decoded")
             #write the decoded data back to original format in  file
             img_file = open(filename, 'wb')
             img_file.write(decoded_data)
             img_file.close()
-            print("file created")
+            logging.debug("file created")
             embeddings = img_model.encode(Image.open(filename))
             # if os.path.exists(filename):
             #     os.remove(filename)
