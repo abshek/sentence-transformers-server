@@ -28,23 +28,24 @@ def transform_sentences():
             filename='images/'+str(uuid.uuid4())+'.jpg'
             #decode base64 string data
             decoded_data=base64.b64decode((input))
-            logging.debug("data decoded")
+            
             #write the decoded data back to original format in  file
             img_file = open(filename, 'wb')
             img_file.write(decoded_data)
             img_file.close()
-            logging.debug("file created")
+            
             embeddings = img_model.encode(Image.open(filename))
+            
+            if os.path.exists(filename):
+                os.remove(filename)
+            else:
+                print("The file does not exist") 
+
             return jsonify({'embeddings': embeddings.tolist()}), 200
-            # if os.path.exists(filename):
-            #     os.remove(filename)
-            # else:
-            #     print("The file does not exist") 
         else:
             embeddings = txt_model.encode(input)
             return jsonify({'embeddings': embeddings.tolist()[0]}), 200
 
-        # return jsonify({'embeddings': embeddings.tolist()[0]}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
