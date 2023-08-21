@@ -40,11 +40,10 @@ def transform_sentences():
                 os.remove(filename)
             else:
                 print("The file does not exist") 
-
-            return jsonify({'embeddings': embeddings.tolist()}), 200
         else:
             embeddings = txt_model.encode(input)
-            return jsonify({'embeddings': embeddings.tolist()[0]}), 200
+        
+        return jsonify({'embeddings': embeddings.tolist()}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
